@@ -60,7 +60,8 @@ public class Node {
         
         public Edge( Node inDest, int inWeight){
             destination = inDest;
-            weight = inWeight;     
+            weight = inWeight; 
+            
         }
         
         public Edge(Node inDest){
@@ -121,8 +122,9 @@ public class Node {
         public void insert(Node dest, int weight)
         {
             Edge newEdge = new Edge(dest, weight);
-    
-            heap[++heapSize] = newEdge;
+            heapSize++;
+            heap[heapSize] = newEdge;
+            
             int pos = heapSize;
             while (pos != 1 && newEdge.weight > heap[pos/2].weight)
             {
@@ -145,7 +147,7 @@ public class Node {
             item = heap[heapSize];
             temp = heap[heapSize--];
     
-    /**
+    
             parent = 1;
             child = 2;
             while (child <= heapSize)
@@ -160,7 +162,7 @@ public class Node {
                 child *= 2;
             }
             heap[parent] = temp;
-    **/
+    
             return item;
         }
     }

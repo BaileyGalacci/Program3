@@ -128,7 +128,7 @@ public class WeightedGraph {
             
             
             
-            for(int k=0; k<i; k++){
+            for(int k=0; k<i-1; k++){
                 // find all vertexes from our newest node and put them in the array
                 int z=999999999;
                 Node.Edge tempEdge;
@@ -146,23 +146,25 @@ public class WeightedGraph {
                 // all relavent edges are now stored in edgeTemp
                // for(j=0; j<theGraph.primTree.Q.size(); j++){          Loop not needed since Q is sorted
                     // check if dest is marked
+                while(!theGraph.primTree.Q.isEmpty()){
                     tempEdge = theGraph.primTree.Q.remove();            // pops an edge off the stack
                     if(tempEdge.weight < z && tempEdge.weight != 0) {
                         z = tempEdge.weight;
                         // store this location for later
                         theGraph.primTree.nodeOrder[k+1] = tempEdge.destination;
                         theGraph.primTree.edgeList[k] = tempEdge;
-                        
                     }
-                //}
+                }
                 
+                theGraph.primTree.nodeOrder[k+1].setIsMarked(true);
+                //}
                 // mark new Node in tree
-                tempEdge.destination.setIsMarked(true);
+                
             }
             
             // print out the results for Prim's Algorithm
             System.out.print("\nPrim's Algorithm");
-            for(j=0;j<i;j++) {
+            for(j=0;j<i-1;j++) {
                 char startNode = theGraph.primTree.nodeOrder[j].getName();
                 char endNode = theGraph.primTree.edgeList[j].destination.getName();
                 System.out.printf("\n%c => %c",startNode,endNode);
