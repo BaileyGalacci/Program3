@@ -56,6 +56,7 @@ public class Node {
     public class Edge{
         int weight = 0;
         Node destination = null;
+        Node home = null;
         
         public Edge( Node inDest, int inWeight){
             destination = inDest;
@@ -71,7 +72,7 @@ public class Node {
     // methods
     public void setEdge(int edgeN, Node inDest, int inWeight){
         this.edge[edgeN] = new Edge(inDest, inWeight);
-        return;
+        this.edge[edgeN].home = this;
     }
     
     public Edge getEdge(int edgeN){
