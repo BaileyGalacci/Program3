@@ -70,6 +70,8 @@ public class Node {
     
     
     // methods
+    // @param capacity
+    // 
     public void setEdge(int edgeN, Node inDest, int inWeight){
         this.edge[edgeN] = new Edge(inDest, inWeight);
         this.edge[edgeN].home = this;
@@ -86,7 +88,8 @@ public class Node {
         private Edge[] heap; 
         private int heapSize, capacity;
     
-        /** Constructor **/
+        /** Constructor
+         * @param capacity **/
         public PriorityQueue(int capacity)
         {    
             this.capacity = capacity + 1;
@@ -139,9 +142,10 @@ public class Node {
                 return null;
             }
     
-            item = heap[1];
+            item = heap[heapSize];
             temp = heap[heapSize--];
     
+    /**
             parent = 1;
             child = 2;
             while (child <= heapSize)
@@ -156,7 +160,7 @@ public class Node {
                 child *= 2;
             }
             heap[parent] = temp;
-    
+    **/
             return item;
         }
     }

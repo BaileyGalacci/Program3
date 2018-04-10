@@ -41,10 +41,15 @@ public class WeightedGraph {
     public class Tree {
 
         public Node[] nodeOrder;
-        public int[] edgeList;
 
-        public Tree() {
-            nodeOrder = null;
+
+
+        public Node.Edge[] edgeList = new Node.Edge[10];
+        Node.PriorityQueue Q;
+        public Tree(){
+            nodeOrder = new Node[6];
+            nodeOrder[0] = new Node('A');
+            Q = nodeOrder[0].new PriorityQueue(10);
         }
     }
 
@@ -129,7 +134,7 @@ public class WeightedGraph {
                 Node.Edge tempEdge;
                 for(j=0; j<i; j++){
                     // most recent node in nodeOrder is k
-                    if(theGraph.primTree.nodeOrder[k].getEdge(j).weight != Integer.MAX_VALUE && theGraph.primTree.nodeOrder[k].getEdge(j).destination.isIsMarked() == false) {
+                    if(theGraph.primTree.nodeOrder[k].getEdge(j).weight != Integer.MAX_VALUE && theGraph.primTree.nodeOrder[k].getEdge(j).destination.isIsMarked() == false && theGraph.primTree.nodeOrder[k].getEdge(j).weight != 0 ) {
                
                         // found a new edge for the queue
                         theGraph.primTree.Q.insert(theGraph.primTree.nodeOrder[k].getEdge(j).destination, theGraph.primTree.nodeOrder[k].getEdge(j).weight);
@@ -139,17 +144,17 @@ public class WeightedGraph {
                     
                 }
                 // all relavent edges are now stored in edgeTemp
-                for(j=0; j<theGraph.primTree.Q.size(); j++){
+               // for(j=0; j<theGraph.primTree.Q.size(); j++){          Loop not needed since Q is sorted
                     // check if dest is marked
                     tempEdge = theGraph.primTree.Q.remove();            // pops an edge off the stack
-                    if(tempEdge.weight < z) {
+                    if(tempEdge.weight < z && tempEdge.weight != 0) {
                         z = tempEdge.weight;
                         // store this location for later
                         theGraph.primTree.nodeOrder[k+1] = tempEdge.destination;
                         theGraph.primTree.edgeList[k] = tempEdge;
                         
                     }
-                }
+                //}
                 
                 // mark new Node in tree
                 tempEdge.destination.setIsMarked(true);
@@ -159,8 +164,8 @@ public class WeightedGraph {
             System.out.print("\nPrim's Algorithm");
             for(j=0;j<i;j++) {
                 char startNode = theGraph.primTree.nodeOrder[j].getName();
-                char endNode = theGraph.primTree.nodeOrder[j].getEdge(edgeTemp[j]).destination.getName();
-                System.out.print(startNode+endNode+' ');
+                char endNode = theGraph.primTree.edgeList[j].destination.getName();
+                System.out.printf("\n%c => %c",startNode,endNode);
             }
             System.out.println("");
 
