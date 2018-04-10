@@ -130,14 +130,18 @@ public class WeightedGraph {
                         if(theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length].getEdge(j).weight < z) {
                             // found a new edge for the queue
                         Qnode[Qnode.length] = theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length];
-                        edgeTemp[j] = theGraph.nodeList[0].getEdge(j).weight; 
+                        edgeTemp[j] = theGraph.nodeList[theGraph.primTree.nodeOrder.length].getEdge(j).weight; 
                         }
                        
                     }
                 }
             }
             
-            
+            // print out the results for Prim's Algorithm
+            for(j=0;j<i;j++) {
+                char startNode = theGraph.primTree.nodeOrder[j].getName();
+                char endNode = theGraph.primTree.nodeOrder[j].getEdge(edgeTemp[j]);
+            }
             
             
             

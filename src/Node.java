@@ -47,6 +47,10 @@ public class Node {
     public void setIsMarked(boolean isMarked) {
         this.isMarked = isMarked;
     }
+
+    public char getName() {
+        return name;
+    }
     
     // Nested Edge class, always up to 6 edges (including one to itself of weight infinity
     public class Edge{
@@ -74,6 +78,5 @@ public class Node {
         return this.edge[edgeN];
     }
     
-    
-    
+
 }
