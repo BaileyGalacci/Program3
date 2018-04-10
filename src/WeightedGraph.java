@@ -110,7 +110,7 @@ public class WeightedGraph {
             }
             
             // initialize the Tree
-            edgeTemp = theGraph.primTree.edgeList;
+            edgeTemp = new int[30];
             // choose node 1 as our first node arbitrarily
             theGraph.primTree.nodeOrder[0] = theGraph.nodeList[0];
             theGraph.nodeList[0].setIsMarked(true);
@@ -123,18 +123,36 @@ public class WeightedGraph {
             
             while(theGraph.primTree.nodeOrder.length < i){
                 // find all vertexes from our newest node and put them in the array
-                int z=999999999;
+                int z=999999999, tempEdgeLoc=0;
                 for(j=0; j<i; j++){
                     // most recent node in nodeOrder is nodeOrder.length
-                    if(theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length].getEdge(j).weight != Integer.MAX_VALUE && theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length].getEdge(j).destination.isIsMarked() == false) {
-                        if(theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length].getEdge(j).weight < z) {
+                    if(theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length-1].getEdge(j).weight != Integer.MAX_VALUE && theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length-1].getEdge(j).destination.isIsMarked() == false) {
+               
                             // found a new edge for the queue
-                        Qnode[Qnode.length] = theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length];
-                        edgeTemp[j] = theGraph.nodeList[theGraph.primTree.nodeOrder.length].getEdge(j).weight; 
-                        }
+                        Qnode[Qnode.length-1] = theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length-1];
+                        edgeTemp[edgeTemp.length-1] = j;  // grab the edge number for use w/ Qnode
+                        
                        
                     }
+                    
                 }
+                // all relavent edges are now stored in edgeTemp
+                for(j=0; j<Qnode.length; j++){
+                    // check if dest is marked
+                    
+                    if(Qnode[j].getEdge(edgeTemp[j]).weight < z) {
+                        z = Qnode[j].getEdge(edgeTemp[j]).weight;
+                        // store this location for later
+                        tempEdgeLoc = j;
+                        
+                    }
+                }
+                // tempEdgeLoc is our edge to drop into the Tree
+                theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length] = Qnode[tempEdgeLoc];
+                theGraph.primTree.edgeList[theGraph.primTree.edgeList.length] = edgeTemp[tempEdgeLoc];
+                
+                // mark new Node in tree
+                Qnode[tempEdgeLoc].getEdge(edgeTemp[tempEdgeLoc]).destination.setIsMarked(true);
             }
             
             // print out the results for Prim's Algorithm
