@@ -32,7 +32,8 @@ public class WeightedGraph {
     
     public WeightedGraph(){
        nodeList = new Node[6];
-     
+       primTree = new Tree();
+       kruskalTree = new Tree();
     }
     
     // nested class Tree
@@ -112,12 +113,12 @@ public class WeightedGraph {
             }
             
             // initialize the Tree
-            theGraph.primTree = new Tree();
+            edgeTemp = theGraph.primTree.edgeList;
             // choose node 1 as our first node arbitrarily
-            primTree.nodeOrder[0] = theGraph.nodeList[0];
+            theGraph.primTree.nodeOrder[0] = theGraph.nodeList[0];
             theGraph.nodeList[0].setIsMarked(true);
             
-            while(primTree.nodeOrder.length < i){
+            while(theGraph.primTree.nodeOrder.length < i){
                 // find all vertexes
                 for(j=0; j<i; j++){
                     edgeTemp[j] = theGraph.nodeList[0].getEdge(j).weight;
@@ -127,7 +128,6 @@ public class WeightedGraph {
             
             
             
-            Tree kruskalTree = new Tree();
             
             
             
