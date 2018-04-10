@@ -118,16 +118,21 @@ public class WeightedGraph {
             // we need an array to stand as our priority queue
             Node[] Qnode = new Node[30];
             Qnode[0] = theGraph.primTree.nodeOrder[0];
-            edgeTemp[0] = asdfasdf;
+            
+            
             
             while(theGraph.primTree.nodeOrder.length < i){
                 // find all vertexes from our newest node and put them in the array
+                int z=999999999;
                 for(j=0; j<i; j++){
                     // most recent node in nodeOrder is nodeOrder.length
                     if(theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length].getEdge(j).weight != Integer.MAX_VALUE && theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length].getEdge(j).destination.isIsMarked() == false) {
-                        // found a new edge for the queue
+                        if(theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length].getEdge(j).weight < z) {
+                            // found a new edge for the queue
                         Qnode[Qnode.length] = theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length];
-                        edgeTemp[j] = theGraph.nodeList[0].getEdge(j).weight;
+                        edgeTemp[j] = theGraph.nodeList[0].getEdge(j).weight; 
+                        }
+                       
                     }
                 }
             }
