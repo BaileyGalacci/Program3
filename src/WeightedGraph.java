@@ -23,10 +23,7 @@ import java.lang.String;
  *  Contains the String array 
  */
 public class WeightedGraph {
-    char A;
-    int B;
-    String C;
-    
+       
     public Node[] nodeList;
     Tree primTree, kruskalTree;
     
@@ -104,7 +101,7 @@ public class WeightedGraph {
             // Prim's algorithm
             // start at the first vertex
             int[] D = new int[i];
-            int[] edgeTemp = new int[i];
+            int[] edgeTemp = new int[30];
             D[0] = 0;   // distance to itself is 0
             
             int j=1;
@@ -118,16 +115,24 @@ public class WeightedGraph {
             theGraph.primTree.nodeOrder[0] = theGraph.nodeList[0];
             theGraph.nodeList[0].setIsMarked(true);
             
+            // we need an array to stand as our priority queue
+            Node[] Qnode = new Node[30];
+            Qnode[0] = theGraph.primTree.nodeOrder[0];
+            edgeTemp[0] = asdfasdf;
+            
             while(theGraph.primTree.nodeOrder.length < i){
-                // find all vertexes
+                // find all vertexes from our newest node and put them in the array
                 for(j=0; j<i; j++){
-                    edgeTemp[j] = theGraph.nodeList[0].getEdge(j).weight;
-                    D[j] = edgeTemp[j];
+                    // most recent node in nodeOrder is nodeOrder.length
+                    if(theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length].getEdge(j).weight != Integer.MAX_VALUE && theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length].getEdge(j).destination.isIsMarked() == false) {
+                        // found a new edge for the queue
+                        Qnode[Qnode.length] = theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length];
+                        edgeTemp[j] = theGraph.nodeList[0].getEdge(j).weight;
+                    }
                 }
             }
             
-            // we need an array to stand as our priority queue
-            Node[] Qnode = theGraph.nodeList;
+            
             
             
             
