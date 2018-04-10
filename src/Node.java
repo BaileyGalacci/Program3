@@ -80,4 +80,85 @@ public class Node {
     }
     
 
+       /** Class PriorityQueue **/
+    public class PriorityQueue
+    {
+        private Edge[] heap; 
+        private int heapSize, capacity;
+    
+        /** Constructor **/
+        public PriorityQueue(int capacity)
+        {    
+            this.capacity = capacity + 1;
+            heap = new Edge[this.capacity];
+            heapSize = 0;
+        }
+        /** function to clear **/
+        public void clear()
+        {
+            heap = new Edge[capacity];
+            heapSize = 0;
+        }
+        /** function to check if empty **/
+        public boolean isEmpty()
+        {
+            return heapSize == 0;
+        }
+        /** function to check if full **/
+        public boolean isFull()
+        {
+            return heapSize == capacity - 1;
+        }
+        /** function to get Size **/
+        public int size()
+        {
+            return heapSize;
+        }
+        /** function to insert task **/
+        public void insert(Node dest, int weight)
+        {
+            Edge newEdge = new Edge(dest, weight);
+    
+            heap[++heapSize] = newEdge;
+            int pos = heapSize;
+            while (pos != 1 && newEdge.weight > heap[pos/2].weight)
+            {
+                heap[pos] = heap[pos/2];
+                pos /=2;
+            }
+            heap[pos] = newEdge;    
+        }
+        /** function to remove task **/
+        public Edge remove()
+        {
+            int parent, child;
+            Edge item, temp;
+            if (isEmpty() )
+            {
+                System.out.println("Heap is empty");
+                return null;
+            }
+    
+            item = heap[1];
+            temp = heap[heapSize--];
+    
+            parent = 1;
+            child = 2;
+            while (child <= heapSize)
+            {
+                if (child < heapSize && heap[child].weight < heap[child + 1].weight)
+                    child++;
+                if (temp.weight >= heap[child].weight)
+                    break;
+    
+                heap[parent] = heap[child];
+                parent = child;
+                child *= 2;
+            }
+            heap[parent] = temp;
+    
+            return item;
+        }
+    }
+    
 }

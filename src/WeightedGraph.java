@@ -104,64 +104,63 @@ public class WeightedGraph {
             // Prim's algorithm
             // start at the first vertex
             int[] D = new int[i];
-            int[] edgeTemp = new int[30];
+            Node.Edge[] edgeTemp;
             D[0] = 0;   // distance to itself is 0
-
-            int j = 1;
-            for (j = 1; j < i; j++) {
+            
+            int j=1;
+            for (j=1; j<i; j++){
                 D[j] = Integer.MAX_VALUE;
             }
-
+            
             // initialize the Tree
-            edgeTemp = new int[30];
+            
             // choose node 1 as our first node arbitrarily
             theGraph.primTree.nodeOrder[0] = theGraph.nodeList[0];
             theGraph.nodeList[0].setIsMarked(true);
-
-            // we need an array to stand as our priority queue
-            Node[] Qnode = new Node[30];
-            Qnode[0] = theGraph.primTree.nodeOrder[0];
-            System.out.println(theGraph.primTree.nodeOrder.length);
-
-            while (theGraph.primTree.nodeOrder.length < i) {
+            
+            // we need a priority queue
+            //theGraph.primTree.Q
+            
+            
+            
+            for(int k=0; k<i; k++){
                 // find all vertexes from our newest node and put them in the array
-                int z = 999999999, tempEdgeLoc = 0;
-                for (j = 0; j < i; j++) {
-                    // most recent node in nodeOrder is nodeOrder.length
-                    if (theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length - 1].getEdge(j).weight != Integer.MAX_VALUE && theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length - 1].getEdge(j).destination.isIsMarked() == false) {
-
+                int z=999999999;
+                Node.Edge tempEdge;
+                for(j=0; j<i; j++){
+                    // most recent node in nodeOrder is k
+                    if(theGraph.primTree.nodeOrder[k].getEdge(j).weight != Integer.MAX_VALUE && theGraph.primTree.nodeOrder[k].getEdge(j).destination.isIsMarked() == false) {
+               
                         // found a new edge for the queue
-                        Qnode[Qnode.length - 1] = theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length - 1];
-                        edgeTemp[edgeTemp.length - 1] = j;  // grab the edge number for use w/ Qnode
-
+                        theGraph.primTree.Q.insert(theGraph.primTree.nodeOrder[k].getEdge(j).destination, theGraph.primTree.nodeOrder[k].getEdge(j).weight);
+                        
+                       
                     }
-
+                    
                 }
                 // all relavent edges are now stored in edgeTemp
-                for (j = 0; j < Qnode.length; j++) {
+                for(j=0; j<theGraph.primTree.Q.size(); j++){
                     // check if dest is marked
-
-                    if (Qnode[j].getEdge(edgeTemp[j]).weight < z) {
-                        z = Qnode[j].getEdge(edgeTemp[j]).weight;
+                    tempEdge = theGraph.primTree.Q.remove();            // pops an edge off the stack
+                    if(tempEdge.weight < z) {
+                        z = tempEdge.weight;
                         // store this location for later
-                        tempEdgeLoc = j;
-
+                        theGraph.primTree.nodeOrder[k+1] = tempEdge.destination;
+                        theGraph.primTree.edgeList[k] = tempEdge;
+                        
                     }
                 }
-                // tempEdgeLoc is our edge to drop into the Tree
-                theGraph.primTree.nodeOrder[theGraph.primTree.nodeOrder.length] = Qnode[tempEdgeLoc];
-                theGraph.primTree.edgeList[theGraph.primTree.edgeList.length] = edgeTemp[tempEdgeLoc];
-
+                
                 // mark new Node in tree
-                Qnode[tempEdgeLoc].getEdge(edgeTemp[tempEdgeLoc]).destination.setIsMarked(true);
+                tempEdge.destination.setIsMarked(true);
             }
-
+            
             // print out the results for Prim's Algorithm
             System.out.print("\nPrim's Algorithm");
-            for (j = 0; j < i; j++) {
+            for(j=0;j<i;j++) {
                 char startNode = theGraph.primTree.nodeOrder[j].getName();
                 char endNode = theGraph.primTree.nodeOrder[j].getEdge(edgeTemp[j]).destination.getName();
-                System.out.print(startNode + endNode + ' ');
+                System.out.print(startNode+endNode+' ');
             }
             System.out.println("");
 
