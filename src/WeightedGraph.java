@@ -122,9 +122,12 @@ public class WeightedGraph {
                 // find all vertexes
                 for(j=0; j<i; j++){
                     edgeTemp[j] = theGraph.nodeList[0].getEdge(j).weight;
+                    D[j] = edgeTemp[j];
                 }
             }
             
+            // we need an array to stand as our priority queue
+            Node[] Qnode = theGraph.nodeList;
             
             
             
