@@ -143,6 +143,5 @@ public class WeightedGraph {
             System.err.format("IOException: %s%n", x);
         }
         
-    return;
     }
 }

@@ -39,6 +39,14 @@ public class Node {
         name = inName;
         
     }
+
+    public boolean isIsMarked() {
+        return isMarked;
+    }
+
+    public void setIsMarked(boolean isMarked) {
+        this.isMarked = isMarked;
+    }
     
     // Nested Edge class, always up to 6 edges (including one to itself of weight infinity
     public class Edge{
