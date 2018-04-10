@@ -38,7 +38,7 @@ public class WeightedGraph {
         public Node[] nodeOrder;
         public int[] edgeList;
         public Tree(){
-            nodeOrder = null;
+            nodeOrder = new Node[6];
         }
     }
     
@@ -157,7 +157,7 @@ public class WeightedGraph {
             
             // print out the results for Prim's Algorithm
             System.out.print("\nPrim's Algorithm");
-            for(j=0;j<i;j++) {
+            for(j=0;j<2;j++) {
                 char startNode = theGraph.primTree.nodeOrder[j].getName();
                 char endNode = theGraph.primTree.nodeOrder[j].getEdge(edgeTemp[j]).destination.getName();
                 System.out.print(startNode+endNode+' ');
