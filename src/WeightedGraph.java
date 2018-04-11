@@ -65,15 +65,15 @@ public class WeightedGraph {
     // print out distance table
     public void printTable(int[][] data, int i){    // fix spacing for large numbers?
         // first line
-        System.out.printf("   ");
+        System.out.printf("  \t");
         for(int j=0; j<i; j++){
-            System.out.printf(" %c ", nodeList[j].getName());
+            System.out.printf(" %c\t", nodeList[j].getName());
         }
         System.out.println("");
         for(int j=0; j<i; j++){
-            System.out.printf(" %c ", nodeList[j].getName());
+            System.out.printf(" %c\t", nodeList[j].getName());
             for(int k=0; k < i; k++){
-                System.out.printf(" %d ", data[j][k]);
+                System.out.printf(" %d\t", data[j][k]);
             }
             System.out.println("");
         }
@@ -220,7 +220,11 @@ public class WeightedGraph {
             int finalFilledStatus =0;
             int[] finals = {-1,-1,-1,-1};
             //main kruskal loop
+
             while(finalEdges[3] == null) {
+
+            //while(theGraph.Forest[0].nodeOrder[4]==null) {
+
                 //finds least weighted edge
                 int s = -1;
                 int w = 99;
@@ -231,16 +235,20 @@ public class WeightedGraph {
                         e = edges[j]; 
                         s=j;
                     }
+
                 }
                 if (e.home.isIsMarked() ^ e.destination.isIsMarked()) {
                     finalEdges[finalFilledStatus] = e;
-                    finals[finalFilledStatus] = 
+                    finals[finalFilledStatus] = s;
                     e.home.setIsMarked(true);
                     e.destination.setIsMarked(true);
                 } else if (e.home.isIsMarked()&& e.destination.isIsMarked()) {
                     
                 }
-            }
+            
+
+                } 
+            //}
            
             // Dijkstra's Algorithm         /////////////////////////////////////
             
