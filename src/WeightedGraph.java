@@ -223,7 +223,7 @@ public class WeightedGraph {
 
             while(finalEdges[3] == null) {
 
-            //while(theGraph.Forest[0].nodeOrder[4]==null) {
+            
 
                 //finds least weighted edge
                 int s = -1;
@@ -242,13 +242,22 @@ public class WeightedGraph {
                     finals[finalFilledStatus] = s;
                     e.home.setIsMarked(true);
                     e.destination.setIsMarked(true);
-                } else if (e.home.isIsMarked()&& e.destination.isIsMarked()) {
-                    
+                } else if (!e.home.isIsMarked()&& !e.destination.isIsMarked()) {
+                    finalEdges[finalFilledStatus] = e;
+                    finals[finalFilledStatus] = s;
+                    e.home.setIsMarked(true);
+                    e.destination.setIsMarked(true);
                 }
-            
+                finalFilledStatus ++;
 
             } 
-            //}
+            
+            // print out the tree
+            System.out.println("\n Kruskal's Algorithm");
+            for(j=0; j<i-1; j++){
+                System.out.printf("%c => %c\n", finalEdges[j].home.getName(), finalEdges[j].destination.getName());
+            }
+         
            
             // Dijkstra's Algorithm         /////////////////////////////////////
             
@@ -265,6 +274,7 @@ public class WeightedGraph {
                 
             }
             // initial print
+            System.out.println("\nDijkstra's Algorithm");
             theGraph.printTable(theGraph.dist, i);
             // Start at node 0, repeat until no more nodes are left ('i' will track this)
             for(int k=0; k<i; k++){
