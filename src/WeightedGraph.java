@@ -200,7 +200,7 @@ public class WeightedGraph {
                         skipCount++;
                         continue;
                     }
-                    edges[4*j+k-skipCount] = theGraph.nodeList[j].getEdge(k);
+                    edges[5*j+k-skipCount] = theGraph.nodeList[j].getEdge(k);
                     
                 }
             }
