@@ -180,13 +180,15 @@ public class WeightedGraph {
             
             
             //creates edge list
+            int skipCount=0;
             Node.Edge[] edges = new Node.Edge[20];
             for (j = 0; j < 5; j++) {
                 for (int k = 0; k < 5; k++) {
                     if (j==k) {
+                        skipCount++;
                         continue;
                     }
-                    edges[4*j+k] = theGraph.nodeList[j].getEdge(k);
+                    edges[4*j+k-skipCount] = theGraph.nodeList[j].getEdge(k);
                     
                 }
             }
