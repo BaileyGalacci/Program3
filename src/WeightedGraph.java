@@ -191,7 +191,7 @@ public class WeightedGraph {
                 System.out.printf("\n%c => %c",startNode,endNode);
             }
             System.out.println("");
-/**
+
             // KRUSKALS ALGORITHM       ////////////////////////////////////////////////
             //unmarks everything and populates the forest
             for (j = 0; j < i; j++) {
@@ -201,13 +201,15 @@ public class WeightedGraph {
             
             
             //creates edge list
-            Node.Edge[] edges = new Node.Edge[21];
+            int skipCount=0;
+            Node.Edge[] edges = new Node.Edge[20];
             for (j = 0; j < 5; j++) {
                 for (int k = 0; k < 5; k++) {
                     if (j==k) {
+                        skipCount++;
                         continue;
                     }
-                    edges[4*j+k] = theGraph.nodeList[j].getEdge(k);
+                    edges[5*j+k-skipCount] = theGraph.nodeList[j].getEdge(k);
                     
                 }
             }
@@ -224,7 +226,7 @@ public class WeightedGraph {
                     }
                 } 
             }
-**/            
+           
             // Dijkstra's Algorithm         /////////////////////////////////////
             
             for (j = 0; j < i; j++) {   // unmark all the nodes again
