@@ -216,21 +216,28 @@ public class WeightedGraph {
                     
                 }
             }
-            
+            Node.Edge[] finalEdges = new Node.Edge[4];
+            int finalFilledStatus =0;
+            int[] finals = {-1,-1,-1,-1};
             //main kruskal loop
-            while(forest.get(0).nodeOrder[4] == null) {
+            while(finalEdges[3] == null) {
                 //finds least weighted edge
+                int s = -1;
                 int w = 99;
                 Node.Edge e = null;
                 for(j=0;j<20;j++) {
-                    if(w > edges[j].weight) {
+                    if(w > edges[j].weight && j != finals[0] && j != finals[1] && j != finals[2] && j != finals[3]) {
                         w = edges[j].weight;
                         e = edges[j]; 
+                        s=j;
                     }
                 }
-                if (e.home.isIsMarked() && e.destination.isIsMarked()) {
-                    continue;
-                } else {
+                if (e.home.isIsMarked() ^ e.destination.isIsMarked()) {
+                    finalEdges[finalFilledStatus] = e;
+                    finals[finalFilledStatus] = 
+                    e.home.setIsMarked(true);
+                    e.destination.setIsMarked(true);
+                } else if (e.home.isIsMarked()&& e.destination.isIsMarked()) {
                     
                 }
             }
