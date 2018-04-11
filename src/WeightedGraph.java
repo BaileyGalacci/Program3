@@ -9,6 +9,7 @@ import java.util.Random;
 import java.util.Stack;
 import java.lang.Math.*;
 import java.lang.String;
+import java.util.ArrayList;
 
 /*
  * TO DO LIST:
@@ -26,7 +27,7 @@ public class WeightedGraph {
 
     public Node[] nodeList;
     Tree primTree, kruskalTree;
-    Tree[] Forest;
+    static Tree[] Forest;
     int[][] dist;
 
     public WeightedGraph() {
@@ -185,10 +186,12 @@ public class WeightedGraph {
 
             // KRUSKALS ALGORITHM       ////////////////////////////////////////////////
             //unmarks everything and populates the forest
+            ArrayList<Tree> forest = new ArrayList<>();
             for (j = 0; j < i; j++) {
                 theGraph.nodeList[j].setIsMarked(false);
-                theGraph.Forest[j].nodeOrder[0] = theGraph.nodeList[j];
+                forest.add(Forest[j]);
             }
+            //initializes forest
             
             
             //creates edge list
@@ -206,16 +209,21 @@ public class WeightedGraph {
             }
             
             //main kruskal loop
-            while(theGraph.Forest[0].nodeOrder[4]==null) {
+            while(forest.get(0).nodeOrder[4] == null) {
                 //finds least weighted edge
                 int w = 99;
-                Node.Edge e;
+                Node.Edge e = null;
                 for(j=0;j<20;j++) {
                     if(w > edges[j].weight) {
                         w = edges[j].weight;
                         e = edges[j]; 
                     }
-                } 
+                }
+                if (e.home.isIsMarked() && e.destination.isIsMarked()) {
+                    continue;
+                } else {
+                    
+                }
             }
            
             // Dijkstra's Algorithm         /////////////////////////////////////
