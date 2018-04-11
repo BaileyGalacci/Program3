@@ -17,7 +17,7 @@ import java.lang.String;
 
 /**
  *
- * @author g96t776
+ * authors: Edward Galacci, Hans Mazur
  * Date: 4/11/16
  * Overview: Part of Weighted Graph
  *  Node class contains the code to setup the pieces of each graph, with connections based on a nested class Edge
