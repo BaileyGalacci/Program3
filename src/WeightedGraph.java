@@ -63,12 +63,21 @@ public class WeightedGraph {
     }
 
     // print out distance table
-    public void printTable(int[][] data, int i){
+    public void printTable(int[][] data, int i){    // fix spacing for large numbers?
+        // first line
+        System.out.printf("   ");
         for(int j=0; j<i; j++){
-                for(int k=0; k < i; k++){
-                   
-                }
+            System.out.printf(" %c ", nodeList[j].getName());
+        }
+        System.out.println("");
+        for(int j=0; j<i; j++){
+            System.out.printf(" %c ", nodeList[j].getName());
+            for(int k=0; k < i; k++){
+                System.out.printf(" %d ", data[j][k]);
             }
+            System.out.println("");
+        }
+        System.out.println("");
     }
     
     public static void main(String[] args) throws IOException {
@@ -240,13 +249,15 @@ public class WeightedGraph {
                 }
                 
             }
-            
+            // initial print
+            theGraph.printTable(theGraph.dist, i);
             // Start at node 0, repeat until no more nodes are left ('i' will track this)
-            for(j=0; j<i; j++){
-                for(int k=0; k < i; k++){
-                    for(int l=0; l<i; l++){
-                        if (theGraph.dist[i][j] > theGraph.dist[i][k] + theGraph.dist[k][j]){
-                            theGraph.dist[i][j] = theGraph.dist[i][k] + theGraph.dist[k][j];
+            for(int k=0; k<i; k++){
+                for(int l=0; l < i; l++){
+                    for(j=0; j<i; j++){
+                        if (theGraph.dist[l][j] > theGraph.dist[l][k] + theGraph.dist[k][j]){
+                            theGraph.dist[l][j] = theGraph.dist[l][k] + theGraph.dist[k][j];
+                            theGraph.printTable(theGraph.dist, i);      // reprint after a change
                         }
                     }
                 }
